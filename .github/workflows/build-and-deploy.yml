@@ -1,0 +1,27 @@
+
+name: Build and Deploy to CloudHub
+
+on:  # Specifies the event triggering the workflow
+  workflow_call:  # Indicates that this is a reusable workflow
+   inputs:  # Defines the inputs that can be passed from the caller workflow
+     refs:  # Name of the input
+       required: true  # Specifies that this input is mandatory
+       type: string  # Specifies the type of the input
+#    secrets:  # Defines the secrets that can be passed from the caller workflow
+#      env:  # Name of the secret
+#        required: true  # Specifies that this secret is mandatory
+    
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Input
+      run: echo ${{input.refs}}
+    - if: ${{github.input.refs == "main")
+      name: main
+      uses: ./.github/workflows/build-and-deploy-main.yml
+    - if: ${{github.input.refs == "dev")
+      name: dev
+      uses: ./.github/workflows/build-and-deploy-dev.yml
