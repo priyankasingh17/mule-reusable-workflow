@@ -18,7 +18,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
     - name: Input
-      run: echo ${{github.input.refs}}
+      run: echo ${{github.inputs.refs}}
+    - name: Input
+      run: echo ${{inputs.refs}}
     # - if: ${{github.input.refs == main)}}
     #   name: main
     #   uses: ./.github/workflows/build-and-deploy-main.yml
