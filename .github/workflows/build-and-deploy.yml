@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Input
       run: echo ${{inputs.refs}}
-    - if: contains(${{inputs.refs}} == 'main')
+    - if: ${{inputs.refs}} == 'main'
       name: main
       uses: ./.github/workflows/build-and-deploy-main.yml
     - if: contains(github.event.inputs.refs, 'dev')
